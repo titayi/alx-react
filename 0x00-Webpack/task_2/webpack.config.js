@@ -1,34 +1,33 @@
-const path = require("path");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: "production",
-  entry: {
-    main: path.resolve(__dirname, "./js/dashboard_main.js"),
-  },
+  entry: './js/dashboard_main.js',
   output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "bundle.js",
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'public'),
   },
-  performance: {
-    hints: false,
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
-  },
+  mode: 'production',
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'public/index.html',
+    }),
+    new MiniCssExtractPlugin(),
+  ],
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(gif|png|jp?g|svg)$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
-          "file-loader",
           {
-            loader: "image-webpack-loader",
+            loader: 'file-loader',
             options: {
-              bypassOnDebug: true,
-              disable: true,
+              name: 'images/[name].[ext]',
             },
           },
         ],
