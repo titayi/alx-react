@@ -1,0 +1,16 @@
+:root {
+  --color-brand: #e01d3f;
+}
+
+.Notifications {
+    border: thin dashed var(--color-brand);
+    padding: 16px;
+}
+
+ul li[data-priority='urgent'] {
+    color: red;
+}
+
+ul li[data-priority='default'] {
+    color: blue;
+}
